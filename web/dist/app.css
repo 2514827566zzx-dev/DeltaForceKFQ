@@ -1,0 +1,31 @@
+/* Layout and colours come from the supplied prototype. These rules handle
+   real song titles, keyboard focus, responsive sizing and the native PiP host. */
+[hidden] { display: none !important; }
+body { margin: 0; }
+.app-shell { min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 32px; }
+.panel { max-width: 100%; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+button:focus-visible, [role="slider"]:focus-visible { outline: 2px solid #ffb800; outline-offset: 3px; }
+input, .song-button, .song-title, .widget-title { min-width: 0; }
+.song-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.song-button { overflow: hidden; }
+.song-duration { flex-shrink: 0; }
+.progress { touch-action: none; }
+.progress::before { content: ''; position: absolute; inset: -9px 0; }
+.notice { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: min(560px, calc(100vw - 32px)); width: max-content; background: #181b1f; border: 1px solid #ffb80066; color: #e8e8e8; padding: 12px 16px; font-size: 13px; z-index: 10; white-space: pre-line; box-shadow: 0 6px 24px #0008; }
+.widget { width: 100%; min-width: 240px; }
+.pip-body { min-height: 0; background: #080a0c; }
+.pip-body .widget { min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+.pip-body .notice { bottom: 4px; font-size: 11px; padding: 6px; }
+@media (max-width: 600px) {
+  .app-shell { padding: 16px 8px; }
+  .panel header { gap: 8px; }
+  .panel header h1 { font-size: 15px; letter-spacing: 0; }
+  .panel header button { white-space: nowrap; }
+  .pagination { flex-wrap: wrap; gap: 8px; }
+  #pagination { margin-left: auto; }
+  #speeds { gap: 0; }
+  #speeds button { width: 38px; }
+}
+@media (prefers-reduced-motion: reduce) { .blink { animation: none; } }

@@ -1,0 +1,11 @@
+Hydra 三角洲口琴公开曲库
+下载日期：2026-10-12
+来源：https://github.com/Dr-hydra/Delta-Force-Harmonica
+网页：https://www.bilibili.com/toy/deltaforce/index.html
+
+共下载 663 首，失败 0 首。
+MIDI：依据项目公开的曲谱编码与导出算法重新生成标准 MIDI Type 1，内嵌原始 DFHS1 谱面快照。包含单音化、移调和音域筛选。Hydra 桌面端可读取快照，其他 MIDI 软件读取音符轨。未做游戏内实测。
+原始谱面：保留公开 JSON 数据、分享者信息及原始快照，便于核对和恢复。
+曲目清单.csv：曲名、分享者、转换音符数量及来源。
+本包来自 Hydra，不是 shushu.fan 的 965 首曲库。版权归各原作者与分享者，请保留来源。
+Jiko、MidiShow、鼠鼠口琴谱本次未纳入；未使用账号、积分或付费入口。

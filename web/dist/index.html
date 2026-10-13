@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>三角洲口风琴自动演奏器</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="prototype.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main id="app" class="app-shell">
+    <section class="cut relative w-[560px] border border-white/10 bg-[#0d1013] shadow-2xl panel" aria-label="三角洲口风琴自动演奏器">
+      <header class="flex items-center justify-between border-b border-white/8 px-5 py-3">
+        <h1 class="font-head text-lg font-bold tracking-wider text-[#FFB800]">三角洲口风琴自动演奏器</h1>
+        <button data-action="minimize" class="border border-white/15 px-2.5 py-1 text-xs text-white/60 hover:text-white" title="收为置顶挂件（Shift+F1）">收为挂件 <span class="font-mono opacity-50">⇧F1</span></button>
+      </header>
+      <div class="px-5 pt-5">
+        <p id="status" class="font-mono text-[10px] tracking-widest text-white/35">READY</p>
+        <h2 id="song-name" class="mt-1 text-2xl font-bold text-white song-title">正在读取曲库…</h2>
+        <div class="mt-4">
+          <div data-progress role="slider" aria-label="演奏进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" class="relative w-full cursor-pointer bg-white/10 h-1.5 progress"><div data-fill class="h-full bg-[#FFB800]" style="width:0%"></div></div>
+          <div class="mt-1.5 flex justify-between font-mono text-[11px] text-white/40"><span data-elapsed>0:00</span><span data-duration>0:00</span></div>
+        </div>
+        <div class="mt-4 flex gap-2">
+          <button data-action="play" disabled class="cut h-11 flex-1 bg-[#FFB800] font-head text-base font-bold tracking-widest text-black hover:brightness-110"><span data-play-label>开始演奏</span> <span class="font-mono text-[10px] font-normal opacity-60">⇧F2</span></button>
+          <button data-action="stop" class="h-11 border border-white/15 px-5 text-sm text-white/70 hover:bg-white/5">停止 <span class="font-mono text-[10px] opacity-50">⇧F9</span></button>
+        </div>
+        <div class="mt-5 flex items-center justify-between"><span class="text-xs text-white/45">速度</span><div id="speeds" class="flex gap-1" aria-label="演奏速度"></div></div>
+      </div>
+      <div class="mt-5 border-t border-white/8 px-5 py-3">
+        <div class="mb-2 flex items-center justify-between"><span class="text-xs text-white/45">候选列表</span><button data-action="import" class="text-xs text-[#FFB800] hover:underline">+ 导入 MIDI / TXT</button></div>
+        <input id="file-input" type="file" accept=".mid,.midi,.txt" multiple hidden>
+        <div class="mb-2 flex gap-2">
+          <input id="search" aria-label="搜索歌曲" placeholder="搜索歌曲" class="h-8 flex-1 border border-white/10 bg-white/[0.03] px-3 text-sm text-white outline-none placeholder:text-white/30 focus:border-[#FFB800]/60" autocomplete="off">
+          <button id="favorites-filter" data-action="filter" aria-pressed="false" class="h-8 border px-3 text-xs border-white/10 text-white/50 hover:text-white">★ 收藏</button>
+        </div>
+        <ul id="songs" class="min-h-[360px]" aria-label="曲目列表"></ul>
+        <div class="mt-2 flex items-center justify-between border-t border-white/8 pt-2 font-mono text-[11px] text-white/40 pagination">
+          <span id="song-count">共 0 首</span><nav id="pagination" class="flex items-center gap-1" aria-label="曲库分页"></nav>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="notice" class="notice" role="alert" hidden></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
