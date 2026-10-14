@@ -14,7 +14,7 @@
 
 ## 保留的界面
 
-保留原型黑黄主面板、切角按钮、曲库搜索/收藏/分页、六档速度、MIDI/TXT 导入，以及独立画中画挂件。曲库和字体均在本地，内置 100 首歌曲。没有新增设置页、账号、音量控制或其他功能入口。
+保留原型黑黄主面板、切角按钮、曲库搜索/收藏/分页、六档速度、MIDI/TXT 导入，以及独立画中画挂件。曲库和字体均在本地，内置 663 首歌曲。没有新增设置页、账号、音量控制或其他功能入口。
 
 暂停和停止都会释放本程序按住的键鼠。拖动进度会暂停，调整后可在接收窗口按 Shift+F2 继续，避免定位时把按键送到控制页。更换接收应用或窗口标题会暂停演奏；关闭控制页、后台断开时也会释放输入。
 
@@ -52,10 +52,10 @@ node --test tests/*.test.mjs
 - [MacInput.swift](./native/MacInput.swift)：Core Graphics 系统输入、焦点检查和全局快捷键。
 - [server.py](./server.py)：仅监听回环地址的本地接口；输入控制要求同源和会话令牌。
 
-Windows 的 SendInput、原生置顶窗口和 EXE 封装仍需另行接入并实测；旧 [启动网页.bat](./启动网页.bat)仅能启动网页服务，不能让本 Mac 输入助手在 Windows 工作。
+Windows 的 SendInput、原生置顶窗口和 EXE 安装包已在 [windows](../windows/) 实现，仍需 Windows 实机验收。[启动网页.bat](./启动网页.bat)仅能启动网页服务，不能让本 Mac 输入助手在 Windows 工作。
 
 ## 曲库与字体来源
 
-100 首 MIDI 保持用户提供文件的原始内容，分享者、来源、音符数保存在 [曲库清单](./dist/assets/library.json)，来源说明见 [SOURCES.txt](./dist/assets/SOURCES.txt)。字体授权随 [fonts](./dist/assets/fonts/)保存。
+663 首 MIDI 保持用户提供文件的原始内容，分享者、来源、音符数保存在 [曲库清单](./dist/assets/library.json)，来源说明见 [SOURCES.txt](./dist/assets/SOURCES.txt)。字体授权随 [fonts](./dist/assets/fonts/)保存。
 
 收藏和个人导入保存在当前浏览器、地址和端口对应的本地存储中。请固定使用同一地址；清除网站数据会清除个人导入与收藏，但不会影响内置曲库。

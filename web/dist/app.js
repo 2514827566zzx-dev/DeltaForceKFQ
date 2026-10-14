@@ -94,7 +94,7 @@ async function pick(id) {
     player.score = null; selected = song; renderList(); updateControls(); savePrefs();
     const score = await scoreFor(song);
     if (version !== selectionVersion) return;
-    await player.load(score, song.id); updateControls();
+    await player.load(score, song.id, song.name); updateControls();
   } catch (error) { if (version === selectionVersion) notice(error.message); }
 }
 async function togglePlay() {
@@ -108,6 +108,10 @@ async function togglePlay() {
 function expand() { pip?.close(); }
 async function minimize() {
   if (pip && !pip.closed) { expand(); return; }
+  if (window.chrome?.webview) {
+    window.chrome.webview.postMessage({ action: 'minimize' });
+    return;
+  }
   if (!window.documentPictureInPicture?.requestWindow) {
     notice('当前浏览器不支持悬浮挂件，请用支持文档画中画的新版 Chrome 或 Edge 打开此本地地址。'); return;
   }
@@ -125,6 +129,17 @@ async function minimize() {
     pip.addEventListener('pagehide', () => { pip = undefined; $('#app').hidden = false; updateControls(); $('[data-action="minimize"]').focus(); }, { once: true });
   } catch { notice('悬浮窗口未能打开，请再次点击“收为挂件”。'); }
 }
+async function nextSong() {
+  const list = visibleSongs(); if (!list.length) return;
+  const index = list.findIndex(s => s.id === selected?.id);
+  await pick(list[(index + 1) % list.length].id);
+}
+// The Windows widget invokes the same controls as the prototype buttons.
+window.harmonicaDesktop = {
+  next: nextSong,
+  play: togglePlay,
+  stop: () => { playVersion++; return player.stop(); },
+};
 async function onClick(event) {
   const button = event.target.closest('button'); if (!button || button.disabled) return;
   try {
@@ -140,11 +155,7 @@ async function onClick(event) {
       case 'stop': playVersion++; await player.stop(); break;
       case 'minimize': await minimize(); break;
       case 'expand': expand(); break;
-      case 'next': {
-        const list = visibleSongs(); if (!list.length) return;
-        const index = list.findIndex(s => s.id === selected?.id);
-        await pick(list[(index + 1) % list.length].id); break;
-      }
+      case 'next': await nextSong(); break;
       case 'filter': onlyFavorites = !onlyFavorites; page = 0; renderList(); break;
       case 'import': if (!importing) $('#file-input').click(); break;
     }

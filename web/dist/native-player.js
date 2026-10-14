@@ -63,9 +63,9 @@ export class NativePlayer {
     });
     this.queue = task; return task;
   }
-  async load(score, songId) {
+  async load(score, songId, title = '') {
     this.score = score; this.scoreId = songId;
-    return this.command('load', { score, songId, speed: this.speed });
+    return this.command('load', { score, songId, title, speed: this.speed });
   }
   play() { return this.command('play'); }
   pause() { return this.command('pause'); }

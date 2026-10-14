@@ -8,9 +8,9 @@ function midi(track, division = 480) {
   const size = track.length;
   return bytes([77,84,104,100,0,0,0,6,0,0,0,1,division >> 8,division & 255,77,84,114,107,size >>> 24,(size >>> 16) & 255,(size >>> 8) & 255,size & 255,...track]);
 }
-test('all 100 included MIDI files match their source counts and prepared durations', async () => {
+test('all 663 included MIDI files match their source counts and prepared durations', async () => {
   const songs = JSON.parse(await readFile(new URL('../dist/assets/library.json', import.meta.url)));
-  assert.equal(songs.length, 100); assert.equal(new Set(songs.map(s => s.id)).size, 100);
+  assert.equal(songs.length, 663); assert.equal(new Set(songs.map(s => s.id)).size, 663);
   for (const song of songs) {
     const buffer = await readFile(new URL('../dist/' + song.file, import.meta.url));
     const score = parseMidi(buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
